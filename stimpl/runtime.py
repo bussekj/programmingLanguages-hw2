@@ -49,7 +49,7 @@ Main evaluation logic!
 def evaluate(expression: Expr, state: State) -> Tuple[Optional[Any], Type, State]:
     match expression:
         case Ren():
-            return ((), Unit(), state)
+            return (None, Unit(), state)
 
         case IntLiteral(literal=l):
             return (l, Integer(), state)
@@ -366,7 +366,7 @@ def evaluate(expression: Expr, state: State) -> Tuple[Optional[Any], Type, State
                         _, _, updated_state = evaluate(body, new_state)
                         return evaluate(While(condition, body), updated_state)
                     else:
-                        return ((), Unit(), new_state)
+                        return (None, Unit(), new_state)
                     
         case _:
             raise InterpSyntaxError("Unhandled!")
