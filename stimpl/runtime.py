@@ -225,7 +225,9 @@ def evaluate(expression: Expr, state: State) -> Tuple[Optional[Any], Type, State
             condition_value, condition_type, new_state = evaluate(condition, state)
             match condition_type:
                 case Boolean():
-                    if condition_value:
+                    if condition_value == None:
+                        return (None, Unit(), new_state)
+                    elif condition_value:
                         return evaluate(true, new_state)
                     else:
                         return evaluate(false, new_state)
