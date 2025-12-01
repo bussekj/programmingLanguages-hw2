@@ -175,7 +175,7 @@ def run_stimpl_sanity_tests():
         check_run_result((True, Boolean(), None), run_stimpl(program))
 
         program = Lte(Ren(), Ren())
-        check_run_result((False, Boolean(), None), run_stimpl(program))
+        check_run_result((True, Boolean(), None), run_stimpl(program))
         program = Lte(BooleanLiteral(True), BooleanLiteral(True))
         check_run_result((True, Boolean(), None), run_stimpl(program))
         program = Lte(IntLiteral(12), IntLiteral(12))
@@ -186,7 +186,7 @@ def run_stimpl_sanity_tests():
         check_run_result((True, Boolean(), None), run_stimpl(program))
 
         program = Eq(Ren(), Ren())
-        check_run_result((False, Boolean(), None), run_stimpl(program))
+        check_run_result((True, Boolean(), None), run_stimpl(program))
         program = Eq(BooleanLiteral(True), BooleanLiteral(True))
         check_run_result((True, Boolean(), None), run_stimpl(program))
         program = Eq(IntLiteral(12), IntLiteral(12))
@@ -219,7 +219,7 @@ def run_stimpl_sanity_tests():
         check_run_result((False, Boolean(), None), run_stimpl(program))
 
         program = Gte(Ren(), Ren())
-        check_run_result((False, Boolean(), None), run_stimpl(program))
+        check_run_result((True, Boolean(), None), run_stimpl(program))
         program = Gte(BooleanLiteral(True), BooleanLiteral(True))
         check_run_result((True, Boolean(), None), run_stimpl(program))
         program = Gte(IntLiteral(12), IntLiteral(12))
@@ -266,7 +266,7 @@ def run_stimpl_sanity_tests():
 
         # Basic variable read/write
         program = Program(Assign(Variable("i"), Ren()), Variable("i"))
-        check_run_result(((), Unit(), None), run_stimpl(program))
+        check_run_result((None, Unit(), None), run_stimpl(program))
 
         program = Program(Assign(Variable("i"), IntLiteral(1)), Variable("i"))
         check_run_result((1, Integer(), None), run_stimpl(program))
@@ -331,7 +331,7 @@ def run_stimpl_sanity_tests():
         program = If(BooleanLiteral(False),
                      StringLiteral("Then"),
                      Ren())
-        check_run_result(((), Unit(), None), run_stimpl(program))
+        check_run_result((None, Unit(), None), run_stimpl(program))
 
         # Check whether If expression condition must be a Boolean.
         program = If(IntLiteral(1),
