@@ -82,8 +82,6 @@ def evaluate(expression: Expr, state: State) -> Tuple[Optional[Any], Type, State
 
             for expr in exprs:
                 last_value, last_type, exprs_state = evaluate(expr, exprs_state)
-            if last_value == ():
-                return (None, Unit(), exprs_state)
             return (last_value, last_type, exprs_state)
 
         case Variable(variable_name=variable_name):
