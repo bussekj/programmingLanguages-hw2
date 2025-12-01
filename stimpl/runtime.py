@@ -227,8 +227,6 @@ def evaluate(expression: Expr, state: State) -> Tuple[Optional[Any], Type, State
                         return evaluate(true, new_state)
                     else:
                         return evaluate(false, new_state)
-                case Unit():
-                    return (None, Unit(), new_state)
 
         case Lt(left=left, right=right):
             left_value, left_type, new_state = evaluate(left, state)
