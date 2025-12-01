@@ -80,14 +80,11 @@ def evaluate(expression: Expr, state: State) -> Tuple[Optional[Any], Type, State
             last_value = None
             last_type = Unit()
 
-            match exprs:
-                case []:
-                    for expr in exprs:
-                        last_value, last_type, exprs_state = evaluate(expr, exprs_state)
-                        return (last_value, last_type, exprs_state)
-                case _:
-                    InterpError("Sequence/Program must have at least one expression.")
-            
+            for expr in exprs:
+                last_value, last_type, exprs_state = evaluate(expr, exprs_state)
+            if len(exprs) == 0:
+                raise InterpTypeError("Sequence/Program must have at least one expression.")
+            return (last_value, last_type, exprs_state)
 
         case Variable(variable_name=variable_name):
             value = state.get_value(variable_name)
