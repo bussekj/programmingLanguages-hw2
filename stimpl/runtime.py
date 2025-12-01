@@ -363,11 +363,11 @@ def evaluate(expression: Expr, state: State) -> Tuple[Optional[Any], Type, State
             match condition_type:
                 case Boolean():
                     if condition_value:
-                        return ((), Unit(), new_state)
-                    else:
                         _, _, updated_state = evaluate(body, new_state)
                         return evaluate(While(condition, body), updated_state)
-
+                    else:
+                        return ((), Unit(), new_state)
+                    
         case _:
             raise InterpSyntaxError("Unhandled!")
     pass
